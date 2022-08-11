@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <h1 style="color:darkblue;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{titulo}}</h1>
+    {% for identificacion, nombre in datos %}
+        <p>Identificacion: {{identificacion}}. {{objetoNombre}}: {{nombre}}</p>
+    {% endfor %}
+{% endblock %}

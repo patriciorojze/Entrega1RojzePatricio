@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <h1>Lista de formularios</h1>
+    <p>Elija el tipo de item que desea agregar.</p>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_tipoplan' %}">Tipos de planes</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_paciente' %}">Pacientes</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_plan' %}">Planes</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_afiliacion' %}">Afiliaciones</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_pago' %}">Pagos</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_especialidad' %}">Especialidades</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_medico' %}">Médicos</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_cita' %}">Citas</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'crear_historia' %}">Historias Clínicas</a>
+{% endblock %}

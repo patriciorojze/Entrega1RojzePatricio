@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <h1>Lista de informes</h1>
+    <p>Elija el tipo de item que quiera consultar.</p>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_tipoplan' %}">Tipos de planes</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_paciente' %}">Pacientes</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_plan' %}">Planes</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_afiliacion' %}">Afiliaciones</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_pago' %}">Pagos</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_especialidad' %}">Especialidades</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_medico' %}">Médicos</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_cita' %}">Citas</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'ver_historia' %}">Historias Clínicas</a>
+    
+
+{% endblock %}

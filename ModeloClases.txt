@@ -1,0 +1,74 @@
+@startuml
+
+class TipoPlan{
+  -NroPlan
+  -NombrePlan
+  -MaxPersonas
+  }
+  
+class Plan{
+-CodigoPlan
+-FechaAfiliacion
+-TipoPlan
+}
+
+
+class Paciente{
+-DNI
+-Nombre
+-Apellido
+-FechaNacimiento
+-Genero
+-Direccion
+-Telefono
+}
+
+
+class Afiliacion{
+-DNI
+-CodigoPlan
+-FechaInicio
+-FechaFin
+}
+
+class Pago{
+-CodigoPlan
+-FechaPago
+-Monto
+}
+
+class Especialidad{
+-NroEspecialidad
+-NombreEspecialidad
+}
+class Medico{
+-NroMedico
+-Nombre
+-Apellido
+-Especialidad
+}
+class Cita{
+-NroMedico
+-DNI
+-FechaHora
+-Cancelada
++CancelarCita()
++Reprogramar()
+}
+class HistoriaClinica{
+-NroMedico
+-DNI
+-FechaNota
+-Notas
+}
+
+TipoPlan "1" *-- "*" Plan
+Paciente "1" *--"*" Afiliacion
+Plan "1" *--"*" Afiliacion
+Plan "1" *--Pago
+Especialidad "1" *--Medico
+Medico "1" *--Cita
+Paciente "1" *--Cita
+Medico "1" *--HistoriaClinica
+Paciente "1" *--HistoriaClinica
+@enduml

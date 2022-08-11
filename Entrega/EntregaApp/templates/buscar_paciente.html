@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <form action = "{% url 'resultado_paciente' %}",method="get">
+        <p>
+            Indique el numero de DNI:
+            <input type="text" name="DNI">
+        </p>
+        <input type="submit" value="Buscar">
+    </form>
+{% endblock %}

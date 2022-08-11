@@ -1,0 +1,51 @@
+
+abstract Base
+
+abstract Buscar_lista
+abstract Formularios_lista
+abstract Informes_lista
+
+abstract Mensaje
+abstract Formularios
+abstract informe
+abstract buscar_paciente
+abstract resultado_paciente
+
+Base --> Buscar_lista
+Base --> Formularios_lista
+Base --> Informes_lista
+Base --> Mensaje
+
+class Clases
+class Clases_Formularios
+class Formularios_individuales
+class Informes_individuales
+class Funciones_Crear
+class Funciones_Ver
+
+class Clase_Paciente
+class Clase_buscar_paciente
+class Clase_buscar_paciente_form
+
+
+Clases ---* Clases_Formularios
+Clases ---* Funciones_Crear
+Clases_Formularios --* Funciones_Crear
+Funciones_Crear --* Formularios_individuales
+Formularios --* Formularios_individuales
+Formularios_lista --> Formularios_individuales
+
+
+Clases ---* Funciones_Ver
+Funciones_Ver --* Informes_individuales
+informe --* Informes_individuales
+Informes_lista --> Informes_individuales
+
+Clases ---* Clase_Paciente
+Clase_Paciente ---* Clase_buscar_paciente
+Clase_Paciente ---* Clase_buscar_paciente_form
+Clase_buscar_paciente --* resultado_paciente
+Clase_buscar_paciente_form --* buscar_paciente
+
+Buscar_lista --> buscar_paciente
+buscar_paciente --> resultado_paciente

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    
+    <h1>Datos del paciente</h1>
+    <p> DNI: {{paciente.DNI}} </p>
+    <p> Nombre: {{paciente.Nombre}} </p>
+    <p> Apellido: {{paciente.Apellido}} </p>
+    <p> Fecha de Nacimiento: {{paciente.FechaNacimiento}} </p>
+    <p> Género: {{paciente.Genero}} </p>
+    <p> Dirección: {{paciente.Direccion}} </p>
+    <p> Teléfono: {{paciente.Telefono}} </p>
+    
+{% endblock %}
