@@ -21,3 +21,5 @@ En el caso particular de la clase Pacientes, se puede buscar los datos particula
 Las relaciones entre páginas y clases es la siguiente:
 
 ![plot](ModeloPagina.png)
+
+Tareas pendientes: integridad referencial entre bases, mejorar el formato, permitir que los formularios muestren opciones disponibles dinámicas.

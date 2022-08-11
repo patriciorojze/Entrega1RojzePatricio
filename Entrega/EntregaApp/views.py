@@ -40,7 +40,7 @@ def crear_TipoPlan(request):
             return redirect('ver_tipoplan')
 
         else:
-            return HttpResponse("Formulario no valido")
+            return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
 def crear_Paciente(request):
 
@@ -67,7 +67,7 @@ def crear_Paciente(request):
             return redirect('ver_paciente')
 
         else:
-            return HttpResponse("Formulario no valido")
+            return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
 def crear_Plan(request):
 
@@ -222,7 +222,7 @@ def crear_HistoriaClinica(request):
             NroMedico = datos.get("NroMedico")
             Notas = datos.get("Notas")
 
-            nuevo_plan = HistoriaClinica(DNI = DNI, NroMedico = NroMedico, FechaHora = datetime.datetime.now(), Notas = Notas)
+            nuevo_plan = HistoriaClinica(DNI = DNI, NroMedico = NroMedico, FechaNota = datetime.datetime.now(), Notas = Notas)
             nuevo_plan.save()
 
             return redirect('ver_historia')
