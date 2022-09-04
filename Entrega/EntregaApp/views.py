@@ -394,4 +394,7 @@ def buscar_paciente(request):
     except:
         return render(request, "mensaje.html", {"mensaje": "Paciente no encontrado"})
 
+def datapicker_pagina(request):
+    return render(request, "datepicker1.html")
+
     

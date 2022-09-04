@@ -2,56 +2,89 @@
 from email.policy import default
 from optparse import Option
 from random import choices
-from django.forms import Form, IntegerField, CharField, EmailField, DateField, FloatField, DateTimeField
+from django.forms import Form, IntegerField, CharField, EmailField, DateField, FloatField, DateTimeField, DateTimeInput, ChoiceField
 
+from EntregaApp.models import TipoPlan, Paciente, Plan, Especialidad, Medico
+from EntregaApp.widgets import BootstrapDateTimePickerInput, BootstrapDatePickerInput
 
 class TipoPlanFormulario(Form):
-    NroPlan = IntegerField()
-    NombrePlan = CharField(max_length=30)
-    MaxPersonas = IntegerField()
+    NroPlan = IntegerField(label="Número de plan")
+    NombrePlan = CharField(max_length=30, label="Nombre del plan")
+    MaxPersonas = IntegerField(label="Máximo de afiliados permitido")
+
+TipoPlanesGet = TipoPlan.objects.all()
+TipoPlanesChoices = []
+
+for tipo in TipoPlanesGet:
+    TipoPlanesChoices.append((tipo.NroPlan, tipo.NombrePlan))
 
 class PlanFormulario(Form):
-    CodigoPlan = CharField()
-    FechaAfiliacion = DateField()
-    TipoPlan = IntegerField()
+    CodigoPlan = CharField(label="Código del plan")
+    FechaAfiliacion = DateField(label="Fecha de afiliación", widget= BootstrapDatePickerInput())
+    TipoPlan = ChoiceField(choices= TipoPlanesChoices, label = "Tipo de plan")
 
-class PacienteFormulario(Form):
-    
-    DNI = IntegerField()
+Generos = [('Masculino', 'Masculino'), ('Femenino', 'Femenino'), ('Otro', 'Otro')]
+class PacienteFormulario(Form):    
+    DNI = IntegerField(label="DNI")
     Nombre = CharField(max_length=45)
     Apellido = CharField(max_length=45)
-    FechaNacimiento = DateField()
-    Genero = CharField(max_length=10)
-    Direccion = CharField(max_length=60)
-    Telefono = CharField(max_length=20)
+    FechaNacimiento = DateField(label="Fecha de Nacimiento", widget= BootstrapDatePickerInput())
+    Genero = ChoiceField(choices= Generos, label= "Género")
+    Direccion = CharField(max_length=60, label="Dirección")
+    Telefono = CharField(max_length=20, label="Teléfono")
+
+PlanesGet = Plan.objects.all()
+PlanesChoices = []
+
+for planlista in PlanesGet:
+    PlanesChoices.append((planlista.CodigoPlan, planlista.CodigoPlan))
+
+PacientesGet = Paciente.objects.all()
+PacientesChoices = []
+
+for pacientelista in PacientesGet:
+    NombreCompleto = pacientelista.Apellido + ', ' + pacientelista.Nombre
+    PacientesChoices.append((pacientelista.DNI, NombreCompleto))
 
 class AfiliacionFormulario(Form):
-    DNI = IntegerField()
-    CodigoPlan = CharField(max_length=15)
-    FechaInicio = DateField()
+    DNI = ChoiceField(choices = PacientesChoices, label = "Paciente")
+    CodigoPlan = ChoiceField(choices= PlanesChoices, label ="Código de Plan")
+    FechaInicio = DateField(label="Fecha de inicio", widget= BootstrapDatePickerInput())
 
 class PagoFormulario(Form):
-    CodigoPlan = CharField(max_length=15)
-    FechaPago = DateField()
+    CodigoPlan = ChoiceField(choices= PlanesChoices, label ="Código de Plan")
+    FechaPago = DateField(label="Fecha de pago", widget= BootstrapDatePickerInput())
     Monto = FloatField()
 
 class EspecialidadFormulario(Form):
-    CodigoEspecialidad = IntegerField()
-    NombreEspecialidad = CharField(max_length=20)
+    CodigoEspecialidad = IntegerField(label="Código de la especialidad")
+    NombreEspecialidad = CharField(max_length=20, label="Nombre de la especialidad")
+
+EspecialidadesGet = Especialidad.objects.all()
+EspecialidadesChoices = []
+for tipo in EspecialidadesGet:
+    EspecialidadesChoices.append((tipo.CodigoEspecialidad, tipo.NombreEspecialidad))
 
 class MedicoFormulario(Form):
-    NroMedico = IntegerField()
+    NroMedico = IntegerField(label="Número de médico")
     Nombre = CharField(max_length=45)
     Apellido = CharField(max_length=45)
-    CodigoEspecialidad = IntegerField()
+    CodigoEspecialidad = ChoiceField(choices = EspecialidadesChoices, label = "Especialidad")
 
+MedicosGet = Medico.objects.all()
+MedicosChoices = []
+for tipo in MedicosGet:
+    NombreCompleto = tipo.Apellido + ', ' + tipo.Nombre
+    MedicosChoices.append((tipo.NroMedico, NombreCompleto))
 class CitaFormulario(Form):
-    DNI = IntegerField()
-    NroMedico = IntegerField()
-    FechaHora = DateTimeField()
-
+    DNI = ChoiceField(choices = PacientesChoices, label = "Paciente")
+    NroMedico = ChoiceField(choices= MedicosChoices, label='Médico')
+    FechaHora = DateTimeField(
+        label = "Fecha y hora de la cita",
+        input_formats=['%d/%m/%Y %H:%M'], 
+        widget = BootstrapDateTimePickerInput())
 
 class HistoriaClinicaFormulario(Form):
-    NroMedico = IntegerField()
-    DNI = IntegerField()
+    NroMedico = ChoiceField(choices= MedicosChoices, label='Médico')
+    DNI = ChoiceField(choices = PacientesChoices, label = "Paciente")
     Notas = CharField(max_length=1600)

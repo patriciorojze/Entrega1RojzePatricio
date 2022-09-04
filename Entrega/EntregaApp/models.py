@@ -1,3 +1,4 @@
+from random import choices
 from django.db import models
 import datetime
 
@@ -14,6 +15,7 @@ class Plan(models.Model):
     TipoPlan = models.IntegerField()
 
 class Paciente(models.Model):    
+    
     DNI = models.IntegerField(primary_key=True)
     Nombre = models.CharField(max_length=45)
     Apellido = models.CharField(max_length=45)
