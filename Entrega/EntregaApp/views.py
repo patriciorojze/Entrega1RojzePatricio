@@ -51,6 +51,7 @@ def crear_Paciente(request):
     else:
 
         miFormulario = PacienteFormulario(request.POST)
+        print(miFormulario.data.get("FechaNacimiento"))
         if miFormulario.is_valid():
             datos = miFormulario.cleaned_data
             DNI = datos.get("DNI")

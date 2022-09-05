@@ -2,10 +2,14 @@
 from email.policy import default
 from optparse import Option
 from random import choices
-from django.forms import Form, IntegerField, CharField, EmailField, DateField, FloatField, DateTimeField, DateTimeInput, ChoiceField
+from django.forms import Form, IntegerField, CharField, EmailField, DateField, FloatField, DateTimeField, DateTimeInput, ChoiceField, DateInput
+
 
 from EntregaApp.models import TipoPlan, Paciente, Plan, Especialidad, Medico
-from EntregaApp.widgets import BootstrapDateTimePickerInput, BootstrapDatePickerInput
+from EntregaApp.widgets import DatePickerInput, DateTimePickerInput
+
+class DatePickerInput(DateInput):
+    input_type = 'date'
 
 class TipoPlanFormulario(Form):
     NroPlan = IntegerField(label="Número de plan")
@@ -20,7 +24,7 @@ for tipo in TipoPlanesGet:
 
 class PlanFormulario(Form):
     CodigoPlan = CharField(label="Código del plan")
-    FechaAfiliacion = DateField(label="Fecha de afiliación", widget= BootstrapDatePickerInput())
+    FechaAfiliacion = DateField(label="Fecha de afiliación", widget= DatePickerInput())
     TipoPlan = ChoiceField(choices= TipoPlanesChoices, label = "Tipo de plan")
 
 Generos = [('Masculino', 'Masculino'), ('Femenino', 'Femenino'), ('Otro', 'Otro')]
@@ -28,7 +32,10 @@ class PacienteFormulario(Form):
     DNI = IntegerField(label="DNI")
     Nombre = CharField(max_length=45)
     Apellido = CharField(max_length=45)
-    FechaNacimiento = DateField(label="Fecha de Nacimiento", widget= BootstrapDatePickerInput())
+    FechaNacimiento = DateField(
+        label="Fecha de Nacimiento", 
+        widget = DatePickerInput()
+        )
     Genero = ChoiceField(choices= Generos, label= "Género")
     Direccion = CharField(max_length=60, label="Dirección")
     Telefono = CharField(max_length=20, label="Teléfono")
@@ -49,11 +56,11 @@ for pacientelista in PacientesGet:
 class AfiliacionFormulario(Form):
     DNI = ChoiceField(choices = PacientesChoices, label = "Paciente")
     CodigoPlan = ChoiceField(choices= PlanesChoices, label ="Código de Plan")
-    FechaInicio = DateField(label="Fecha de inicio", widget= BootstrapDatePickerInput())
+    FechaInicio = DateField(label="Fecha de inicio", widget= DatePickerInput())
 
 class PagoFormulario(Form):
     CodigoPlan = ChoiceField(choices= PlanesChoices, label ="Código de Plan")
-    FechaPago = DateField(label="Fecha de pago", widget= BootstrapDatePickerInput())
+    FechaPago = DateField(label="Fecha de pago", widget= DatePickerInput())
     Monto = FloatField()
 
 class EspecialidadFormulario(Form):
@@ -81,8 +88,7 @@ class CitaFormulario(Form):
     NroMedico = ChoiceField(choices= MedicosChoices, label='Médico')
     FechaHora = DateTimeField(
         label = "Fecha y hora de la cita",
-        input_formats=['%d/%m/%Y %H:%M'], 
-        widget = BootstrapDateTimePickerInput())
+         widget = DateTimePickerInput())
 
 class HistoriaClinicaFormulario(Form):
     NroMedico = ChoiceField(choices= MedicosChoices, label='Médico')
