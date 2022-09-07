@@ -1,0 +1,17 @@
+{% extends 'base2.html' %}
+
+{% block contenido %}
+    <h1>Bandeja de mensajes</h1>
+    <h3>Mensajes de {{request.user.username}}</h3>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'enviar_mensaje' %}">Enviar mensaje nuevo</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'recibidos_mensaje' %}">Mensajes recibidos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'enviados_mensaje' %}">Mensajes enviados</a>
+    </li>
+
+
+{% endblock contenido %}

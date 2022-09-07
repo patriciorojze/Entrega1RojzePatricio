@@ -1,4 +1,4 @@
-from django.forms import Form, CharField, EmailField, PasswordInput, ImageField
+from django.forms import Form, CharField, EmailField, PasswordInput, ChoiceField, TextInput
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
@@ -37,5 +37,12 @@ class UserPasswordForm(UserCreationForm):
             "password2": "",
         }
 
-class AvatarForm(Form):
-    imagen = ImageField()
+
+UsuariosGet = User.objects.all()
+UsuarioChoices = []
+
+for tipo in UsuariosGet:
+    UsuarioChoices.append((tipo.id, tipo.username))
+class MensajeForm(Form):
+    usuario2 = ChoiceField(choices= UsuarioChoices, label="Destinatario")
+    mensaje = CharField(max_length=1400, widget= TextInput(attrs={'class':'special', 'style': 'width:500px; height:400px'}))

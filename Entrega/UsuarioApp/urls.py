@@ -11,6 +11,10 @@ urlpatterns = [
     path("registro/", registrar_usuario, name = "registrar_usuario"),
     path("logout/", LogoutView.as_view(template_name = "logout.html"), name="logout"),
     path("contrasena/", modificar_contrasena, name="modificar_contrasena"),
-    path("avatar/", crear_avatar, name="crear_avatar")
+    path("avatar/", change_nuevo, name="crear_avatar"),
+    path("bandeja/", bandeja_de_entrada, name="bandeja_de_entrada"),
+    path("bandeja/enviar", enviar_mensaje, name="enviar_mensaje"),
+    path("bandeja/enviados", ver_enviados, name="enviados_mensaje"),
+    path("bandeja/recibidos", ver_recibidos, name="recibidos_mensaje")
 ]
 

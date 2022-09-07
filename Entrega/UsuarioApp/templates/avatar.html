@@ -1,14 +1,21 @@
 {% extends 'base2.html' %}
+{% load i18n avatar_tags %}
 
 {% block contenido %}
-    <h3> Avatar del usuario {{request.user.username}}</h3>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {{form.as_p}}
-
-        <input type = "submit" value = "Cargar avatar"> </input>
+    <p>{% trans "Su avatar actual: " %}</p>
+    {% avatar user %}
+    {% if not avatars %}
+        <p>{% trans "Usted no ha cargado un avatar. Elija uno por favor." %}</p>
+    {% else %}
+        <form method="POST" action="{% url 'avatar_change' %}">
+            <ul>
+                {{ primary_avatar_form.as_ul }}
+            </ul>
+            <p>{% csrf_token %}<input type="submit" value="{% trans "Elija el nuevo predeterminado" %}" /></p>
+        </form>
+    {% endif %}
+    <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+        {{ upload_avatar_form.as_p }}
+        <p>{% csrf_token %}<input type="submit" value="{% trans "Cargar nueva imagen" %}" /></p>
     </form>
-
-
-{% endblock contenido %}
+{% endblock %}

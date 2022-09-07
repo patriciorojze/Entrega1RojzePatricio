@@ -32,7 +32,8 @@
     <div class="row">
         <h1>Página del centro médico Pérez.</h1>
         <h3 style="font-family:verdana;"><i>Tu lugar en la salud</i></h3>
-        <div class="column left",  style="background-color:#D0DCE7;">
+        <h4>Página de gestión del usuario</h4>
+        <div class="column left",  style="background-color:#8BEA1F;">
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
@@ -47,6 +48,9 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'crear_avatar' %}">Crear avatar</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'bandeja_de_entrada' %}">Bandeja de entrada</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Cerrar sesión</a>
                 </li>
                 <li class="nav-item">
@@ -54,7 +58,7 @@
                 </li>
             </ul>
         </div>
-        <div class="column right",  style="background-color:#1F8EEA;"">
+        <div class="column right",  style="background-color: #C8E6EC ;"">
             
             {% block  contenido%}
             <h1>Bienvenido/a al Centro Médico Perez.</h1>

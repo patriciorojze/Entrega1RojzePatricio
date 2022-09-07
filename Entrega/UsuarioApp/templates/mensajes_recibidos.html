@@ -1,0 +1,12 @@
+{% extends 'base2.html' %}
+
+{% block contenido %}
+    <h1>Mensajes recibidos</h1>
+    <h3>Mensajes de {{request.user.username}}</h3>
+
+    <h1 style="color:darkblue;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{titulo}}</h1>
+    {% for NombreRecibido, Fecha, Texto in datos %}
+        <p>Mensaje de {{NombreRecibido}} recibido en {{Fecha}}: </p>
+        <p>{{Texto}}</p>
+    {% endfor %}
+{% endblock %}

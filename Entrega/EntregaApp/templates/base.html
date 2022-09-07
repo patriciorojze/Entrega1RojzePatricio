@@ -1,3 +1,4 @@
+{% load avatar_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +21,13 @@
         .right {
             width: 75%;
         }
+        .left2 {
+            width: 75%;
+        }
+
+        .right2 {
+            width: 25%;
+        }
 
         .row:after {
           content: "";
@@ -30,21 +38,37 @@
 </head>
 <body>
     <div class="row">
-        <h1>Página del centro médico Pérez.</h1>
-        <h3 style="font-family:verdana;"><i>Tu lugar en la salud</i></h3>
-        {% if request.user.is_authenticated %}
-            <div class="d-flex flex-column align-items-end">
-                <p style="font-family:verdana;"><b>{{request.user.username}} </b> </p>
-                <img src= "" alt = "avatar">
-                <a class="nav-link active" aria-current="page" href="{% url 'modificar_contrasena' %}">Cambiar contraseña</a>
-                <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Cerrar sesión</a>
-            </div>
-        {% else %}
-            <div class="d-flex flex-column align-items-end">
-                <p>{{request.user.username}}</p>
-                <a class="nav-link active" aria-current="page" href="{% url 'iniciar_sesion' %}">Iniciar sesión</a>
-            </div>
-        {% endif %}
+        <div class="column left2">
+            <h1>Página del centro médico Pérez.</h1>
+            <h3 style="font-family:verdana;"><i>Tu lugar en la salud</i></h3>
+        </div>
+        <div class="column right2">
+            {% if request.user.is_authenticated %}
+                <div class="d-flex flex-column align-items-end">
+                    <p style="font-family:verdana;"><b>Usuario/a:</b> {{request.user.username}}  </p>
+                    {% avatar user %}
+                    <a class="nav-link active" aria-current="page" href="{% url 'modificar_contrasena' %}" style="font-size:11px">
+                        Cambiar contraseña
+                    </a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'crear_avatar' %}" style="font-size:11px">
+                        Cambiar avatar
+                    </a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'bandeja_de_entrada' %}" style="font-size:11px">
+                        Bandeja de mensajes
+                    </a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'logout' %}"  style="font-size:11px"> 
+                        Cerrar sesión
+                    </a>
+                </div>
+            {% else %}
+                <div class="d-flex flex-column align-items-end">
+                    <p>{{request.user.username}}</p>
+                    <a class="nav-link active" aria-current="page" href="{% url 'iniciar_sesion' %}">Iniciar sesión</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
         <div class="column left",  style="background-color:#D0DCE7;">
             <ul class="nav flex-column">
                 <li class="nav-item">

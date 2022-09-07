@@ -22,4 +22,4 @@ Las relaciones entre páginas y clases es la siguiente:
 
 ![plot](ModeloPagina.png)
 
-Tareas pendientes: integridad referencial entre bases, mejorar el formato, permitir que los formularios muestren opciones disponibles dinámicas.
+Aparte de la página de gestión, hay una página de gestión del usuario. En esta página, se pueden crear avatares y mandar mensajes entre usuarios. Se necesita registrar para poder acceder a ciertos datos de la gestión. Todas la gestión del usuario está en la app de UsuariosApp

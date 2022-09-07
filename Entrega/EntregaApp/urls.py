@@ -28,6 +28,8 @@ urlpatterns = [
     path("ver/historia/", ver_HistoriaClinica, name="ver_historia"),
     path("crear/historia/", crear_HistoriaClinica, name="crear_historia"),
     path("buscar/paciente/", buscar_paciente_form, name="buscar_paciente"),
+    path("buscar/historia/", buscar_historia_form, name="buscar_historia"),
     path("resultado/paciente/", buscar_paciente, name="resultado_paciente"),
+    path("resultado/historia/", buscar_historia, name="resultado_historia"),
     path("datapicker/", datapicker_pagina, name="datapicker_pagina")
 ]

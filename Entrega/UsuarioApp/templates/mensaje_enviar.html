@@ -1,0 +1,14 @@
+{% extends 'base2.html' %}
+
+{% block contenido %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{form.as_p}}
+
+        <input type = "submit" value = "Enviar mensaje"> </input>
+    </form>
+
+
+{% endblock contenido %}

@@ -3,14 +3,11 @@ from django.http import HttpResponse
 from EntregaApp.forms import *
 from EntregaApp.models import *
 from django.contrib.auth.decorators import login_required
-from UsuarioApp.models import Avatar
 
 # Create your views here.
 
 def pagina_base(request):
     context = dict()
-    print(Avatar.objects.get(usuario = request.user.id).imagen.url)
-
     return render(request, "base.html", context)
 
 def formulario_lista(request):
@@ -399,7 +396,7 @@ def ver_HistoriaClinica(request):
 
 @login_required
 def buscar_paciente_form(request):
-    return render(request, "buscar_paciente.html")
+    return render(request, "buscar_paciente.html", context= {"titulo": "Búsqueda de datos del paciente."})
 
 @login_required
 def buscar_paciente(request):
@@ -414,6 +411,39 @@ def buscar_paciente(request):
         return render(request, "resultado_paciente.html", {"paciente": paciente})
     except:
         return render(request, "mensaje.html", {"mensaje": "Paciente no encontrado"})
+
+@login_required
+def buscar_historia_form(request):
+    return render(request, "buscar_historia.html", context= {"titulo": "Búsqueda de historias clinicas."})
+
+@login_required
+def buscar_historia(request):
+    DNI = request.GET.get("DNI", None)
+
+    if not DNI:
+        return HttpResponse("No se indicó ningún DNI.")
+
+    try:
+        historias = HistoriaClinica.objects.filter(DNI = DNI)
+        paciente = Paciente.objects.get(DNI = DNI)
+        print(DNI)
+
+        print(paciente.Nombre)
+        print(historias)
+        print("@@")
+
+        datos = []
+        for historia in historias:
+            print(historia.NroMedico)
+            medicoRedactor = Medico.objects.get(NroMedico = historia.NroMedico)
+            datos.append((medicoRedactor.Nombre, medicoRedactor.Apellido, historia.FechaNota, historia.Notas))
+
+        paciente = Paciente.objects.get(DNI = DNI)
+        NombreCompleto = paciente.Apellido + ", " + paciente.Nombre
+        return render(request, "resultado_historia.html", {"paciente": NombreCompleto, "datos": datos})
+    except:
+        return render(request, "mensaje.html", {"mensaje": "Paciente no encontrado"})
+
 
 def datapicker_pagina(request):
     return render(request, "datepicker1.html")

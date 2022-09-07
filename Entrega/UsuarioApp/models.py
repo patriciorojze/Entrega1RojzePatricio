@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Mensaje(models.Model):
+    usuario1 = models.IntegerField()
+    usuario2 = models.IntegerField()
+    fecha = models.DateTimeField()
+    mensaje = models.CharField(max_length=1400)
 
-class Avatar(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to = "avatares", null = True, blank = True)    
 
         

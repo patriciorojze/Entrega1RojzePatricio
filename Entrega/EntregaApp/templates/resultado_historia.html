@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    
+    <h1>Historia clínica del paciente {{paciente}}</h1>
+    {% for Nombre, Apellido, FechaNota, Notas in datos %}
+        <p>El Dr./Dra. {{Nombre}} {{Apellido}} redactó en {{FechaNota}}: </p>
+        <p>{{Notas}}</p>
+    {% endfor %}
+    
+{% endblock %}
