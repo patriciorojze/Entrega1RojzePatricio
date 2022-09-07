@@ -1,17 +1,13 @@
+from distutils.command.upload import upload
 from django.db import models
+from django.contrib.auth.models import User
 
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
 
 # Create your models here.
 
 
-def iniciar_sesion(request):
-    if request.method == "GET":
-        formulario = AuthenticationForm()
-
-        context = {
-            "form": formulario
-        }
+class Avatar(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to = "avatares", null = True, blank = True)    
 
         

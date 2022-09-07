@@ -2,12 +2,14 @@ from random import choices
 from django.db import models
 import datetime
 
+
 # Create your models here.
 
 class TipoPlan(models.Model):
     NroPlan = models.IntegerField(primary_key= True)
     NombrePlan = models.CharField(max_length=30)
     MaxPersonas = models.IntegerField()
+
 
 class Plan(models.Model):
     CodigoPlan = models.CharField(primary_key=True, max_length=15)

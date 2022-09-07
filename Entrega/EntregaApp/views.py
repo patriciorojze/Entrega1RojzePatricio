@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from EntregaApp.forms import *
 from EntregaApp.models import *
+from django.contrib.auth.decorators import login_required
+from UsuarioApp.models import Avatar
 
 # Create your views here.
 
 def pagina_base(request):
     context = dict()
+    print(Avatar.objects.get(usuario = request.user.id).imagen.url)
 
     return render(request, "base.html", context)
 
@@ -19,6 +22,7 @@ def informe_lista(request):
 def buscar_lista(request):
     return render(request, "buscar_lista.html")
 
+@login_required
 def crear_TipoPlan(request):
 
     if request.method == "GET":
@@ -42,6 +46,7 @@ def crear_TipoPlan(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_Paciente(request):
 
     if request.method == "GET":
@@ -70,6 +75,7 @@ def crear_Paciente(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_Plan(request):
 
     if request.method == "GET":
@@ -93,6 +99,7 @@ def crear_Plan(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_Afiliacion(request):
 
     if request.method == "GET":
@@ -116,6 +123,7 @@ def crear_Afiliacion(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_Pago(request):
 
     if request.method == "GET":
@@ -139,6 +147,7 @@ def crear_Pago(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_Especialidad(request):
 
     if request.method == "GET":
@@ -161,6 +170,7 @@ def crear_Especialidad(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_Medico(request):
 
     if request.method == "GET":
@@ -185,6 +195,7 @@ def crear_Medico(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_Cita(request):
 
     if request.method == "GET":
@@ -208,6 +219,7 @@ def crear_Cita(request):
         else:
             return render(request, "mensaje.html",{"mensaje":"Formulario no válido"})
 
+@login_required
 def crear_HistoriaClinica(request):
 
     if request.method == "GET":
@@ -247,6 +259,7 @@ def ver_TipoPlan(request):
 
     return render(request, "informe.html", context)
 
+@login_required
 def ver_Paciente(request):
     planes = Paciente.objects.all()
     
@@ -264,6 +277,7 @@ def ver_Paciente(request):
 
     return render(request, "informe.html", context)
 
+@login_required
 def ver_Plan(request):
     planes = Plan.objects.all()
     
@@ -281,6 +295,7 @@ def ver_Plan(request):
 
     return render(request, "informe.html", context)
 
+@login_required
 def ver_Afiliacion(request):
     planes = Afiliacion.objects.all()
     
@@ -297,6 +312,7 @@ def ver_Afiliacion(request):
 
     return render(request, "informe.html", context)
 
+@login_required
 def ver_Pago(request):
     planes = Pago.objects.all()
     
@@ -346,6 +362,7 @@ def ver_Medico(request):
 
     return render(request, "informe.html", context)
 
+@login_required
 def ver_Cita(request):
     planes = Cita.objects.all()
     
@@ -363,6 +380,7 @@ def ver_Cita(request):
 
     return render(request, "informe.html", context)
 
+@login_required
 def ver_HistoriaClinica(request):
     planes = HistoriaClinica.objects.all()
     
@@ -379,9 +397,11 @@ def ver_HistoriaClinica(request):
 
     return render(request, "informe.html", context)
 
+@login_required
 def buscar_paciente_form(request):
     return render(request, "buscar_paciente.html")
 
+@login_required
 def buscar_paciente(request):
 
     DNI = request.GET.get("DNI", None)

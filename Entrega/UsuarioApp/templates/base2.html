@@ -32,34 +32,26 @@
     <div class="row">
         <h1>Página del centro médico Pérez.</h1>
         <h3 style="font-family:verdana;"><i>Tu lugar en la salud</i></h3>
-        {% if request.user.is_authenticated %}
-            <div class="d-flex flex-column align-items-end">
-                <p style="font-family:verdana;"><b>{{request.user.username}} </b> </p>
-                <img src= "" alt = "avatar">
-                <a class="nav-link active" aria-current="page" href="{% url 'modificar_contrasena' %}">Cambiar contraseña</a>
-                <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Cerrar sesión</a>
-            </div>
-        {% else %}
-            <div class="d-flex flex-column align-items-end">
-                <p>{{request.user.username}}</p>
-                <a class="nav-link active" aria-current="page" href="{% url 'iniciar_sesion' %}">Iniciar sesión</a>
-            </div>
-        {% endif %}
         <div class="column left",  style="background-color:#D0DCE7;">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'pagina_base' %}">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'formulario_lista' %}">Insertar nuevos datos</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'registrar_usuario' %}">Crear nuevo usuario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'informe_lista' %}">Ver listas de datos</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'modificar_contrasena' %}">Cambiar contraseña</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'buscar_lista' %}"> Búsqueda </a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'crear_avatar' %}">Crear avatar</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'pagina_base' %}"> Volver al inicio </a>
+                </li>
             </ul>
         </div>
         <div class="column right",  style="background-color:#1F8EEA;"">
